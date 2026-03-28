@@ -1,0 +1,32 @@
+[project]
+name = "mock-api"
+version = "0.1.0"
+description = "A mock REST API service for testing"
+requires-python = ">=3.12"
+dependencies = [
+    "quart>=0.19.0",
+    "hypercorn>=0.16.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.pylint.main]
+fail-under = 9.0
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint."messages control"]
+disable = [
+    "missing-module-docstring",
+]
