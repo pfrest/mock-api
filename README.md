@@ -1,5 +1,8 @@
 # mock-api
 
+[![Quality](https://github.com/pfrest/mock-api/actions/workflows/quality.yml/badge.svg)](https://github.com/pfrest/mock-api/actions/workflows/quality.yml)
+[![Release](https://github.com/pfrest/mock-api/actions/workflows/release.yml/badge.svg)](https://github.com/pfrest/mock-api/actions/workflows/release.yml)
+
 A lightweight mock REST API service built with [Quart](https://quart.palletsprojects.com/).
 Designed for testing—configure it with plain JSON files and a Docker container.
 
@@ -12,12 +15,8 @@ the HTTP method and URL path:
 <method>_<path>.json
 ```
 
-Path encoding rules:
-
-| In filename | In URL  |
-|-------------|---------|
-| `_`         | `/`     |
-| `__`        | `_`     |
+> [!IMPORTANT]
+> Use double-underscores to denote an actual underscore in the URL.
 
 ### Examples
 
@@ -38,8 +37,11 @@ Path encoding rules:
 }
 ```
 
-All fields are optional (`status_code` defaults to `200`, `body` to `{}`,
-`headers` to `{}`).
+> [!NOTE]
+> - All fields are optional. `status_code` defaults to `200`, `body` and `headers` default to `{}`.
+> - `status_code` sets the status code returned by the mock-api when requests are received.
+> - `headers` sets the response headers returned by the mock-api when requests are received.
+> - `body` sets the response body return by the mock-api when requests are received.
 
 ## Authentication
 
@@ -84,7 +86,3 @@ Merges into `main` trigger the release workflow which uses
 [Release Please](https://github.com/googleapis/release-please) to generate a
 changelog from [Conventional Commits](https://www.conventionalcommits.org/) and
 publish a Docker image to `ghcr.io`.
-
-> **Note:** To enable Dependabot auto-merge, configure branch protection on
-> `main` to require the `check_lint` and `check_test` status checks before
-> merging.
