@@ -32,13 +32,13 @@ All fields are optional; defaults are ``status_code=200``, ``body={}``,
 
 Authentication
 --------------
-Set the ``AUTH_HEADERS`` environment variable to a JSON object whose keys
+Set the ``MOCK_API_AUTH_HEADERS`` environment variable to a JSON object whose keys
 are the required request header names and whose values are the expected
 header values.  An empty object (the default) disables authentication.
 
 Example::
 
-    AUTH_HEADERS='{"Authorization": "Bearer my-token"}'
+    MOCK_API_AUTH_HEADERS='{"Authorization": "Bearer my-token"}'
 """
 
 import json
@@ -115,19 +115,19 @@ def create_app(
 
     Args:
         mocks_dir: Directory containing mock JSON files.  Defaults to the
-            ``MOCKS_DIR`` environment variable, falling back to ``"mocks"``.
+            ``MOCK_API_MOCKS_DIR`` environment variable, falling back to ``"mocks"``.
         auth_headers: Request headers required for authentication.  Pass an
             empty dict (``{}``) to disable auth.  Defaults to the
-            ``AUTH_HEADERS`` environment variable (parsed as JSON), falling
+            ``MOCK_API_AUTH_HEADERS`` environment variable (parsed as JSON), falling
             back to ``{}``.
 
     Returns:
         Configured :class:`quart.Quart` application instance.
     """
     if mocks_dir is None:
-        mocks_dir = os.environ.get("MOCKS_DIR", "mocks")
+        mocks_dir = os.environ.get("MOCK_API_MOCKS_DIR", "mocks")
     if auth_headers is None:
-        auth_headers = json.loads(os.environ.get("AUTH_HEADERS", "{}"))
+        auth_headers = json.loads(os.environ.get("MOCK_API_AUTH_HEADERS", "{}"))
 
     app = quart.Quart(__name__)
     mocks = load_mocks(mocks_dir)

@@ -43,11 +43,11 @@ All fields are optional (`status_code` defaults to `200`, `body` to `{}`,
 
 ## Authentication
 
-Set `AUTH_HEADERS` to a JSON object of header name/value pairs that every
+Set `MOCK_API_AUTH_HEADERS` to a JSON object of header name/value pairs that every
 request must supply:
 
 ```bash
-AUTH_HEADERS='{"Authorization": "Bearer my-token"}'
+MOCK_API_AUTH_HEADERS='{"Authorization": "Bearer my-token"}'
 ```
 
 Leave it unset (or `{}`) to disable authentication.
@@ -58,17 +58,17 @@ Leave it unset (or `{}`) to disable authentication.
 docker run \
   -p 5000:5000 \
   -v "$(pwd)/my-mocks:/mocks" \
-  -e MOCKS_DIR=/mocks \
-  -e AUTH_HEADERS='{"Authorization": "Bearer test"}' \
+  -e MOCK_API_MOCKS_DIR=/mocks \
+  -e MOCK_API_AUTH_HEADERS='{"Authorization": "Bearer test"}' \
   ghcr.io/pfrest/mock-api:latest
 ```
 
 ## Environment variables
 
-| Variable       | Default  | Description                                           |
-|----------------|----------|-------------------------------------------------------|
-| `MOCKS_DIR`    | `mocks`  | Directory containing mock JSON files                  |
-| `AUTH_HEADERS` | `{}`     | JSON object of required request headers (auth config) |
+| Variable                | Default  | Description                                           |
+|-------------------------|----------|-------------------------------------------------------|
+| `MOCK_API_MOCKS_DIR`    | `mocks`  | Directory containing mock JSON files                  |
+| `MOCK_API_AUTH_HEADERS` | `{}`     | JSON object of required request headers (auth config) |
 
 ## Development
 

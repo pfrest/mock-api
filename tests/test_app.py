@@ -148,15 +148,15 @@ class TestCreateApp:
         assert isinstance(app, quart.Quart)
 
     def test_defaults_read_from_env_mocks_dir(self, tmp_path, monkeypatch):
-        """MOCKS_DIR env-var is used when mocks_dir is not provided."""
-        monkeypatch.setenv("MOCKS_DIR", str(tmp_path))
-        monkeypatch.setenv("AUTH_HEADERS", "{}")
+        """MOCK_API_MOCKS_DIR env-var is used when mocks_dir is not provided."""
+        monkeypatch.setenv("MOCK_API_MOCKS_DIR", str(tmp_path))
+        monkeypatch.setenv("MOCK_API_AUTH_HEADERS", "{}")
         app = create_app()
         assert app is not None
 
     def test_defaults_read_from_env_auth_headers(self, tmp_path, monkeypatch):
-        """AUTH_HEADERS env-var is used when auth_headers is not provided."""
-        monkeypatch.setenv("AUTH_HEADERS", '{"X-Token": "secret"}')
+        """MOCK_API_AUTH_HEADERS env-var is used when auth_headers is not provided."""
+        monkeypatch.setenv("MOCK_API_AUTH_HEADERS", '{"X-Token": "secret"}')
         app = create_app(mocks_dir=str(tmp_path))
         assert app is not None
 

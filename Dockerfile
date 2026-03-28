@@ -9,6 +9,6 @@ COPY app/ ./app/
 
 EXPOSE 5000
 
-ENV MOCKS_DIR=/mocks
+ENV MOCK_API_MOCKS_DIR=/mocks
 
 CMD ["python", "-m", "hypercorn", "--bind", "0.0.0.0:5000", "app.app:create_app()"]
