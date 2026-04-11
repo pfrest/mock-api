@@ -5,7 +5,7 @@ description = "A mock REST API service for testing"
 requires-python = ">=3.12"
 dependencies = [
     "quart>=0.19.0",
-    "hypercorn>=0.16.0",
+    "hypercorn>=0.18.0",
 ]
 
 [tool.pytest.ini_options]
